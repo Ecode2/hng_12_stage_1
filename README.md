@@ -95,7 +95,7 @@ Create a **.env** file in the project root with settings similar to:
 ```
 SECRET_KEY=your-secret-key
 DEBUG=True
-ALLOWED_HOSTS=127.0.0.1,localhost,your-deployment-url.com
+ALLOWED_HOSTS=127.0.0.1,localhost,hng-stage1-96c03cc41e90.herokuapp.com
 ```
 
 ---
