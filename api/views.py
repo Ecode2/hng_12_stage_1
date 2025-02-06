@@ -50,24 +50,23 @@ class NumberClassifierView(APIView):
     def get_properties(self, number: int) -> list:
         properties = []
 
-        # check if the number is an armstrong 
-        digits = [int(d) for d in str(number)]  
-        power = len(digits)  
-        is_armstrong = sum(d ** power for d in digits) == number
+        # If the number is negative, only check if it's even or odd
+        if number < 0:
+            return ["even"] if number % 2 == 0 else ["odd"]
 
-        even = False
-        if number % 2 == 0:
-            even = True
+        # Check if the number is an Armstrong number
+        digits = [int(d) for d in str(number)]
+        power = len(digits)
+        is_armstrong = sum(d ** power for d in digits) == number
 
         if is_armstrong:
             properties.append("armstrong")
-        
-        if even:
-            properties.append("even")
-        else:
-            properties.append("odd")
-        
+
+        # Check if the number is even or odd
+        properties.append("even" if number % 2 == 0 else "odd")
+
         return properties
+
 
 
     def is_prime(self, number: int) -> bool:
@@ -80,10 +79,7 @@ class NumberClassifierView(APIView):
     
 
     def get_digit_sum(self, number: int) -> int:
-        sum = 0
+        # Use the absolute value of the number to avoid the '-' character
+        return sum(int(d) for d in str(abs(number)))
 
-        for number in str(number):
-            sum += int(number)
-
-        return sum
     
